@@ -1,0 +1,90 @@
+server:
+  port: 8089
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalogdb?currentSchema=public
+    username: prasannakrishnabhagwat
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        default_schema: public
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/catalogdb
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: catalog-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+multitenancy:
+  enabled: false
+
+api:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: catalog-service-group
+      auto-offset-reset: earliest
+      concurrency: 1
+
+catalog:
+  inventory-service-url: http://localhost:8085
+  community-manager-url: http://localhost:8081
+  cart-service-url: http://localhost:8091
+  ai-service-url: http://localhost:8099
+  approval-rating-threshold: 75
+  rating-weight: 0.6
+  subscription-weight: 0.4
+  subscription-capacity:
+    soft-allocation-ratio: 0.7
+    service-level-z: 1.65
+    spot-reserve-ratio: 0.2
+    lookback-months: 3
+    lead-time-months: 1
+  frequency-suggestion:
+    stability-threshold: 0.70
+    safety-buffer: 0.90
+    default-lead-time-days: 3
+    rolling-window-days: 90
+  trial:
+    auto-allocation-percentage: 0.10
+    default-trial-units: 50
+
+service:
+  core:
+    api-configs:
+      cart-subscriptions:
+        host: http://localhost:8091
+        path: /api/subscription-cart/{customerId}
+        method: GET
+      community-memberships:
+        host: http://localhost:8081
+        path: /api/community-customer/memberships/{customerId}
+        method: GET
+      community-products-batch:
+        host: http://localhost:8081
+        path: /api/community-seller-products/products-for-communities
+        method: GET
+
+logging:
+  level:
+    org.springframework.security: WARN
+  config: classpath:logback-observability.xml

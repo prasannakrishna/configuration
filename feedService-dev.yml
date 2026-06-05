@@ -1,0 +1,42 @@
+server:
+  port: 8101
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/feeddb
+    username: prasannakrishnabhagwat
+    password: admin123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/feeddb
+    redis:
+      host: localhost
+      port: 6379
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: feed-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+multitenancy:
+  fail-on-missing-tenant: false
+  default-tenant-id: public
+
+api:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: feed-service

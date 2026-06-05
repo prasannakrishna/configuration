@@ -1,0 +1,23 @@
+server:
+  port: 8094
+
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/financedb
+    username: prasannakrishnabhagwat
+    password: admin123
+  jpa:
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: localhost:9092
+
+api:
+  kafka:
+    consumer:
+      group-id: finance-service-group
+
+logging:
+  config: classpath:logback-observability.xml

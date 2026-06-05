@@ -1,0 +1,47 @@
+server:
+  port: 8096
+
+aws:
+  region: us-east-1
+  accessKeyId: ${AWS_ACCESS_KEY_ID:}
+  secretAccessKey: ${AWS_SECRET_ACCESS_KEY:}
+
+  sns:
+    email:
+      topicArn: ${SNS_EMAIL_TOPIC_ARN:arn:aws:sns:us-east-1:123456789012:email-notifications}
+    whatsapp:
+      topicArn: ${SNS_WHATSAPP_TOPIC_ARN:arn:aws:sns:us-east-1:123456789012:whatsapp-notifications}
+    sms:
+      topicArn: ${SNS_SMS_TOPIC_ARN:arn:aws:sns:us-east-1:123456789012:sms-notifications}
+    push:
+      topicArn: ${SNS_PUSH_TOPIC_ARN:arn:aws:sns:us-east-1:123456789012:push-notifications}
+
+  sqs:
+    email:
+      queueUrl: ${SQS_EMAIL_QUEUE_URL:https://sqs.us-east-1.amazonaws.com/123456789012/email-queue}
+    whatsapp:
+      queueUrl: ${SQS_WHATSAPP_QUEUE_URL:https://sqs.us-east-1.amazonaws.com/123456789012/whatsapp-queue}
+    sms:
+      queueUrl: ${SQS_SMS_QUEUE_URL:https://sqs.us-east-1.amazonaws.com/123456789012/sms-queue}
+    push:
+      queueUrl: ${SQS_PUSH_QUEUE_URL:https://sqs.us-east-1.amazonaws.com/123456789012/push-queue}
+
+  s3:
+    bucketName: ${S3_BUCKET_NAME:notification-datastore}
+
+sqs:
+  consumer:
+    enabled: false
+    pollIntervalMs: 5000
+    maxMessages: 10
+    waitTimeSeconds: 20
+
+whatsapp:
+  meta:
+    phoneNumberId: ${WHATSAPP_PHONE_NUMBER_ID:YOUR_PHONE_NUMBER_ID}
+    accessToken: ${WHATSAPP_ACCESS_TOKEN:YOUR_ACCESS_TOKEN}
+    wabaId: ${WHATSAPP_WABA_ID:YOUR_WABA_ID}
+    apiBaseUrl: https://graph.facebook.com
+    apiVersion: v19.0
+    webhookVerifyToken: ${WHATSAPP_WEBHOOK_VERIFY_TOKEN:my-secret-verify-token}
+    appSecret: ${WHATSAPP_APP_SECRET:YOUR_APP_SECRET}

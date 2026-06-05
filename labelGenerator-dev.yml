@@ -1,0 +1,31 @@
+server:
+  port: 8103
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/labeldb
+    username: prasannakrishnabhagwat
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+app:
+  printers:
+    - id: "SHIPPING_PRINTER_01"
+      name: "Warehouse Shipping Label Printer"
+      type: "NETWORK_THERMAL"
+      address: "192.168.1.100"
+      port: 9100
+    - id: "PACKING_PRINTER_01"
+      name: "Packing Station Label Printer"
+      type: "NETWORK_THERMAL"
+      address: "192.168.1.101"
+      port: 9100
+    - id: "OFFICE_PRINTER_01"
+      name: "Admin Office Laser Printer"
+      type: "CLOUD_PRINT"
+      address: "cloudprint.example.com/api/print"
+      port: 443

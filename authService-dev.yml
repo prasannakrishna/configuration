@@ -1,0 +1,39 @@
+server:
+  port: 8097
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/userdb
+    username: prasannakrishnabhagwat
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/userdb
+      auto-index-creation: true
+  security:
+    user:
+      name: admin
+      password: admin123
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/scm
+
+keycloak:
+  server-url: http://localhost:8181
+  realm: scm
+  client-id: scm-backend
+  client-secret: JWNcEsWwB55seZR4nYd4feW0AD7o1A7g
+
+userservice:
+  base-url: http://localhost:8087
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+  config: classpath:logback-observability.xml

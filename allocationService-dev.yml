@@ -1,0 +1,65 @@
+server:
+  port: 8095
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/allocationdb
+    username: prasannakrishnabhagwat
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+api:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: allocation-service-group
+
+multitenancy:
+  enabled: false
+  fail-on-missing-tenant: false
+  default-tenant-id: public
+
+service:
+  core:
+    api-configs:
+      inventory-allocatable-non-packaging:
+        host: http://localhost:8087
+        path: /api/v1/inventory/allocatable/non-packaging
+        method: GET
+      inventory-allocatable-packaging:
+        host: http://localhost:8087
+        path: /api/v1/inventory/allocatable/packaging-required
+        method: GET
+      inventory-allocatable-stores:
+        host: http://localhost:8087
+        path: /api/v1/inventory/allocatable/stores
+        method: GET
+      inventory-allocatable-warehouses:
+        host: http://localhost:8087
+        path: /api/v1/inventory/allocatable/warehouses
+        method: GET
+      inventory-allocatable-seller-facility:
+        host: http://localhost:8087
+        path: /api/v1/inventory/allocatable/seller-facility
+        method: GET
+      location-cluster-distance:
+        host: http://localhost:8089
+        path: /api/v1/distance
+        method: GET
+
+allocation:
+  thread-pool-size: 16
+  batch-save-size: 500
+  store-allocation-enabled: false
+  warehouse-allocation-enabled: false
+  seller-allocation-enabled: true
+  max-retry-attempts: 3
+  retry-interval-hours: 24
+  reserve-response-timeout-seconds: 120
+
+logging:
+  config: classpath:logback-observability.xml
