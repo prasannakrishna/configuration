@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: cartManager
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/cartdb'
+    username: prasannakrishnabhagwat
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  data:
+    mongodb:
+      uri: 'mongodb://localhost:27017/cartdb'
+      auto-index-creation: true
+  kafka:
+    bootstrap-servers: 'localhost:9092'
+    producer:
+      bootstrap-servers: 'localhost:9092'
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      bootstrap-servers: 'localhost:9092'
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: cart-mongo-updater-group
+      auto-offset-reset: earliest
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+server:
+  port: 8091
+kafka:
+  bootstrap-servers: 'localhost:9092'
+  topic: cart-events
+app:
+  kafka:
+    topics:
+      cart-events:
+        name: cart.events
+        partitions: 6
+        replicas: 3
+        retention-ms: 604800000
+        cleanup-policy: delete
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://localhost:8761/eureka/'
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

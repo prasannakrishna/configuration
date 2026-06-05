@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: orderService
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/tmp'
+    username: pocuser
+    password: 'Admin@1234'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+axon:
+  axonserver:
+    servers: 'localhost:8024'
+    client-id: orderService
+    context: default
