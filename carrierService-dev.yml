@@ -42,6 +42,8 @@ multitenancy:
   enabled: true
   default-tenant-id: public
   fail-on-missing-tenant: false
+  provisioning:
+    migrations-location: classpath:db/migration
 
 api:
   kafka:
