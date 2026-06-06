@@ -40,7 +40,7 @@ spring:
 
 multitenancy:
   enabled: true
-  default-tenant-id: carrierdb
+  default-tenant-id: public
   fail-on-missing-tenant: false
 
 api:
