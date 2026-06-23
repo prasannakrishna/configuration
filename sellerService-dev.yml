@@ -84,6 +84,18 @@ service:
         host: http://localhost:8083
         path: /api/v1/pack-configurations/{id}
         method: DELETE
+      inventory-pack-config-ref-count:
+        host: http://localhost:8083
+        path: /api/v1/pack-configurations/{id}/reference-count
+        method: GET
+      inventory-pack-config-reference:
+        host: http://localhost:8083
+        path: /api/v1/pack-configurations/{id}/reference
+        method: POST
+      inventory-pack-config-unref:
+        host: http://localhost:8083
+        path: /api/v1/pack-configurations/{id}/reference
+        method: DELETE
       inventory-create:
         host: http://localhost:8083
         path: /api/v1/inventories
