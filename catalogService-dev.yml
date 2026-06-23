@@ -46,10 +46,6 @@ api:
       concurrency: 1
 
 catalog:
-  inventory-service-url: http://localhost:8085
-  community-manager-url: http://localhost:8081
-  cart-service-url: http://localhost:8091
-  ai-service-url: http://localhost:8099
   approval-rating-threshold: 75
   rating-weight: 0.6
   subscription-weight: 0.4
@@ -83,6 +79,61 @@ service:
         host: http://localhost:8081
         path: /api/community-seller-products/products-for-communities
         method: GET
+      ai-seller-equilibrium-signal:
+        host: http://localhost:8099
+        path: /api/ai/agents/seller/equilibrium-signal
+        method: POST
+        response-timeout: 3000
+      seller-subscription-tier:
+        host: http://localhost:8084
+        path: /api/sellers/{id}/subscription-tier
+        method: GET
+        response-timeout: 2000
+      notification-seller-equilibrium:
+        host: http://localhost:8086
+        path: /api/v1/notifications/seller/equilibrium
+        method: POST
+        response-timeout: 4000
+      dp-demand-forecast:
+        host: http://localhost:8001
+        path: /api/analytics/intelligence/demand-forecast
+        method: GET
+        response-timeout: 3000
+      dp-safety-stock:
+        host: http://localhost:8001
+        path: /api/analytics/intelligence/safety-stock
+        method: GET
+        response-timeout: 3000
+      dp-working-capital-seller-summary:
+        host: http://localhost:8001
+        path: /api/analytics/intelligence/working-capital/seller-summary
+        method: GET
+        response-timeout: 3000
+      dp-community-demand:
+        host: http://localhost:8001
+        path: /api/analytics/space/community-demand
+        method: GET
+        response-timeout: 3000
+      dp-price-observation:
+        host: http://localhost:8001
+        path: /api/analytics/intelligence/price-observation
+        method: POST
+        response-timeout: 3000
+      ai-seasonal-frequency-adjustment:
+        host: http://localhost:8099
+        path: /api/ai/seasonal-supply/frequency-adjustment
+        method: POST
+        response-timeout: 5000
+      ai-seasonal-analyze:
+        host: http://localhost:8099
+        path: /api/ai/seasonal-supply/analyze
+        method: POST
+        response-timeout: 5000
+      ai-seasonal-safe-slots:
+        host: http://localhost:8099
+        path: /api/ai/seasonal-supply/safe-slots
+        method: POST
+        response-timeout: 5000
 
 logging:
   level:
