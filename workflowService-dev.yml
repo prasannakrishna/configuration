@@ -1,0 +1,43 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: workflow-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: java.util.Map
+
+service:
+  core:
+    rest-client:
+      request-time-out: 30000
+      response-time-out: 30000
+      connection-time-out: 10000
+    api-configs:
+      wf-orch-start:
+        host: http://localhost:8115
+        path: /api/v1/workflows/start
+        method: POST
+      wf-orch-start-by-context:
+        host: http://localhost:8115
+        path: /api/v1/workflows/start-by-context
+        method: POST
+      wf-orch-instance:
+        host: http://localhost:8115
+        path: /api/v1/workflows/{id}
+        method: GET
+      wf-orch-active-by-party:
+        host: http://localhost:8115
+        path: /api/v1/workflows/active/{id}
+        method: GET
+      wf-orch-complete-step:
+        host: http://localhost:8115
+        path: /api/v1/workflows/{id}/complete-step
+        method: POST
+      wf-orch-skip-step:
+        host: http://localhost:8115
+        path: /api/v1/workflows/{id}/skip-step
+        method: POST
