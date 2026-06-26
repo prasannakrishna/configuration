@@ -60,6 +60,14 @@ service:
         host: http://localhost:8083
         path: /api/v1/skus
         method: POST
+      inventory-skus-search:
+        host: http://localhost:8083
+        path: /api/v1/skus/search
+        method: GET
+      inventory-skus-seller-linked:
+        host: http://localhost:8083
+        path: /api/v1/skus/seller-linked
+        method: GET
       inventory-sku-by-id:
         host: http://localhost:8083
         path: /api/v1/skus/{id}
@@ -68,6 +76,10 @@ service:
         host: http://localhost:8083
         path: /api/v1/skus/{id}
         method: DELETE
+      inventory-sku-link-pack-config:
+        host: http://localhost:8083
+        path: /api/v1/skus/{id}/link-pack-config
+        method: POST
       inventory-pack-configs:
         host: http://localhost:8083
         path: /api/v1/pack-configurations
