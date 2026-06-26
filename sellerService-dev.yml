@@ -72,6 +72,10 @@ service:
         host: http://localhost:8083
         path: /api/v1/pack-configurations
         method: GET
+      inventory-pack-configs-search:
+        host: http://localhost:8083
+        path: /api/v1/pack-configurations/search
+        method: GET
       inventory-pack-configs-create:
         host: http://localhost:8083
         path: /api/v1/pack-configurations
