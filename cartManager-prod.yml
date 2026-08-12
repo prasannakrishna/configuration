@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: cartManager
+  datasource:
+    url: jdbc:postgresql://postgres:5432/cartdb
+    username: commart
+    password: commart123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/cartdb
+      auto-index-creation: true
+    redis:
+      host: redis
+      port: 6379
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: cartManager-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: \"*\"
+server:
+  port: 8091
+eureka:
+  client:
+    enabled: false
