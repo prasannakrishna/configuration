@@ -29,3 +29,4 @@ server:
 eureka:
   client:
     enabled: false
+spring.cloud.config.fail-fast: false
