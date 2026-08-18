@@ -22,9 +22,30 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: \"*\"
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/userdb
+      auto-index-creation: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak:8080/realms/scm/protocol/openid-connect/certs
+          issuer-uri: http://keycloak:8080/realms/scm
+
 server:
   port: 8087
+
 eureka:
   client:
     enabled: false
+
 spring.cloud.config.fail-fast: false
+
+keycloak:
+  server-url: http://keycloak:8080
+  realm: scm
+  admin:
+    username: admin
+    password: admin123
+    client-id: admin-cli

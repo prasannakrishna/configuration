@@ -22,9 +22,26 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: \"*\"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/realms/scm
+
 server:
   port: 8097
+
 eureka:
   client:
     enabled: false
+
 spring.cloud.config.fail-fast: false
+
+keycloak:
+  server-url: http://keycloak:8080
+  realm: scm
+  client-id: scm-backend
+  client-secret: JWNcEsWwB55seZR4nYd4feW0AD7o1A7g
+
+userservice:
+  base-url: http://user-service:8087
