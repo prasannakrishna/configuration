@@ -28,3 +28,9 @@ eureka:
   client:
     enabled: false
 spring.cloud.config.fail-fast: false
+
+app:
+  kafka:
+    topics:
+      inventory-publish: seller.inventory.publish
+      shipping-orders: order.shipping.events
