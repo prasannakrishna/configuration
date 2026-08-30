@@ -145,7 +145,7 @@ app:
   kafka:
     topics:
       inventory-publish: seller.inventory.publish
-      shipping-orders: order.shipping.events
+      shipping-orders: seller.shipping-orders
 
 seller:
   workflow:
