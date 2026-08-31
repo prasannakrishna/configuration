@@ -28,3 +28,14 @@ eureka:
   client:
     enabled: false
 spring.cloud.config.fail-fast: false
+service:
+  core:
+    api-configs:
+      location-pincode-cluster:
+        host: http://location-manager:8089
+        path: /api/v1/pincode/cluster
+        method: POST
+      carrier-lane-resolve:
+        host: http://carrier-service:8083
+        path: /api/v1/logistics/resolve
+        method: GET
