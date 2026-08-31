@@ -28,3 +28,10 @@ eureka:
   client:
     enabled: false
 spring.cloud.config.fail-fast: false
+service:
+  core:
+    api-configs:
+      carrier-network-resolve:
+        host: http://carrier-network-service:8104
+        path: /api/v1/networks/resolve-path/{origin}/{destination}
+        method: GET
