@@ -35,3 +35,7 @@ service:
         host: http://carrier-network-service:8104
         path: /api/v1/networks/resolve-path/{origin}/{destination}
         method: GET
+      logistics-verify-capability:
+        host: http://carrier-service:8083
+        path: /api/v1/logistics/verify-capability
+        method: GET
