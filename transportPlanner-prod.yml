@@ -22,6 +22,11 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: \"*\"
+transport:
+  planning:
+    mode: BATCHED
+    cron: "0 0 * * * *"
+    max-sellers-per-plan: 3
 server:
   port: 8108
 eureka:
